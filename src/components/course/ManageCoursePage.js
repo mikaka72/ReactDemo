@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as CourseActions from '../../actions/CourseActions';
 import CourseForm from './CourseForm';
+import toastr from 'toastr';
 class ManageCoursePage extends React.Component {
     
         constructor(props, context){
@@ -11,7 +12,8 @@ class ManageCoursePage extends React.Component {
            
             this.state = {
                 course: Object.assign({}, this.props.course),
-                errors: {}
+                errors: {},
+                saving: false
             };
             
             this.updateCourseState = this.updateCourseState.bind(this);
@@ -33,10 +35,21 @@ class ManageCoursePage extends React.Component {
 
         saveCourse(event) {
             event.preventDefault();
-            this.props.actions.saveCourse(this.state.course);
-            this.context.router.push('/courses');
+            this.setState({saving: true});
+            
+            this.props.actions.saveCourse(this.state.course)
+            .then(() => this.redirect('/courses'))
+            .catch(error => {
+                toastr.error(error);
+                this.setState({saving: false});
+            });
+           
         }
-
+        redirect(routeTo){
+            this.setState({saving: false});
+            toastr.success('Course saved');
+            this.context.router.push(routeTo);
+        }
         // onChange is needed so the form fields are accessible. calls update cours state with event.
         render(){
             return(
@@ -46,6 +59,7 @@ class ManageCoursePage extends React.Component {
                     onSave={this.saveCourse}
                     course={this.state.course}
                     errors={this.state.errors}
+                    saving={this.state.saving}
                 />
                 
             );
@@ -56,6 +70,7 @@ class ManageCoursePage extends React.Component {
         course: PropTypes.object.isRequired,
         authors: PropTypes.array.isRequired,
         actions: PropTypes.object.isRequired
+        
     };
 
     ManageCoursePage.contextTypes = {
