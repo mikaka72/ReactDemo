@@ -10,6 +10,7 @@ import {loadAuthors} from './actions/AuthorActions';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
+import 'semantic-ui-css/semantic.min.css';
 
 const store = configureStore();
 store.dispatch(loadCourses());

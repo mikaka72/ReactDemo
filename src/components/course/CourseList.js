@@ -4,7 +4,7 @@ import CourseListRow from './CourseListRow';
 const CourseList = ({courses, deleteCourse}) => {
     return (
 
-        <table className="table">
+        <table className="ui celled table">
             <thead>
             <tr>
                 <th>&nbsp;</th>

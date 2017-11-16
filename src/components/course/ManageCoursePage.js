@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import * as CourseActions from '../../actions/CourseActions';
 import CourseForm from './CourseForm';
 import toastr from 'toastr';
+import { Segment } from 'semantic-ui-react';
+
 class ManageCoursePage extends React.Component {
     
         constructor(props, context){
@@ -53,6 +55,7 @@ class ManageCoursePage extends React.Component {
         // onChange is needed so the form fields are accessible. calls update cours state with event.
         render(){
             return(
+                <Segment raised>
                 <CourseForm 
                     allAuthors={this.props.authors}
                     onChange={this.updateCourseState}
@@ -61,7 +64,7 @@ class ManageCoursePage extends React.Component {
                     errors={this.state.errors}
                     saving={this.state.saving}
                 />
-                
+                </Segment>
             );
         }
     }

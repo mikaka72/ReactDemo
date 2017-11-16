@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/CourseActions';
 import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
+import { Segment } from 'semantic-ui-react';
 
 class CoursesPage extends React.Component {
 
@@ -25,12 +26,14 @@ class CoursesPage extends React.Component {
         const {courses} = this.props;
         return(
             <div>
+                <Segment raised>
                 <h1>Courses</h1>
                 <input type = "submit"
                     value= "Add course"
-                    className = "btn btn-primary"
+                    className = "ui button"
                     onClick={this.redirectToAddCoursePage}/>
                 <CourseList courses={courses}/>
+                </Segment>
             </div>
         );
     }

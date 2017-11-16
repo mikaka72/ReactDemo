@@ -1,16 +1,19 @@
 import React, {PropTypes} from 'react';
 import Header from './common/Header';
+import HeaderMenu from './common/HeaderMenu';
+import Loading from './common/Loading';
 import {connect} from 'react-redux';
+
+
 
 class App extends React.Component{
 
     render(){
         return(
             <div className="container-fluid">
-                <Header
-                    loading={this.props.loading}
-                />
+                <HeaderMenu/>
                {this.props.children}
+               {this.props.loading && <Loading/>}
             </div>
         );
     }
@@ -22,9 +25,13 @@ App.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+
     return {
         loading: state.ajaxCallsInProgress > 0
+       
     };
 }
+
+
 
 export default connect(mapStateToProps)(App);

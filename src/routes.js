@@ -9,6 +9,7 @@ import ManageCoursePage from './components/course/ManageCoursePage';
 const routes = (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
+        <Route path="home" component={HomePage}/>
         <Route path="courses" component={CoursesPage}/>
         <Route path="course" component={ManageCoursePage}/>
         <Route path="course/:id" component={ManageCoursePage}/>
